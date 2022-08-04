@@ -10,23 +10,23 @@ export class PatientService {
   constructor(@InjectModel(Patient.name) private readonly patientModel: Model<PatientDocument>) { }
 
 
-  create(createPatientDto: CreatePatientDto) {
-    return this.patientModel.create(createPatientDto);
+  async create(createPatientDto: CreatePatientDto) {
+    return await this.patientModel.create(createPatientDto);
   }
 
-  findAll() {
-    return this.patientModel.find()
+  async findAll() {
+    return await this.patientModel.find()
   }
 
-  findOne(id: string) {
-    return this.patientModel.findById(id)
+  async findOne(id: string) {
+    return await this.patientModel.findById(id)
   }
 
-  update(id: string, updatePatientDto: UpdatePatientDto) {
-    return this.patientModel.updateOne({ _id: id }, { $set: updatePatientDto });
+  async update(id: string, updatePatientDto: UpdatePatientDto) {
+    return await this.patientModel.updateOne({ _id: id }, { $set: updatePatientDto });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} patient`;
+  async remove(id: number) {
+    return await `This action removes a #${id} patient`;
   }
 }

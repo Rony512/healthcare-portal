@@ -1,13 +1,13 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, ObjectId } from 'mongoose';
+import { Document, ObjectId, SchemaTypes, Types } from 'mongoose';
 
 export type RequestDocument = Request & Document;
 
 @Schema()
 export class Request {
-    @Prop({ required: true, type: Object })
-    patientId: ObjectId;
-    
+    @Prop({ required: true, type: SchemaTypes.ObjectId })
+    patientId: Types.ObjectId;
+
     @Prop({ required: true })
     requestType: string;
 
@@ -18,13 +18,13 @@ export class Request {
     patientAge: number;
 
     @Prop({ required: true })
-    condition: number;
+    condition: string;
+
+    @Prop({ required: true, type: Object })
+    physicalExam: Object;
 
     @Prop({ required: true })
-    physicalExam: Object[];
-
-    @Prop({ required: true })
-    diagnose: string[];
+    diagnose: string;
 
     @Prop()
     prescription: string;

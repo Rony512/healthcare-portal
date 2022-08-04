@@ -9,23 +9,28 @@ import { Request, RequestDocument } from './schemas/request.schema';
 export class RequestService {
   constructor(@InjectModel(Request.name) private readonly RequestModel: Model<RequestDocument>) { }
 
-  create(createRequestDto: CreateRequestDto) {
-    return 'This action adds a new request';
+  async create(createRequestDto: CreateRequestDto) {
+    return await this.RequestModel.create(createRequestDto);
   }
 
-  findAll() {
-    return this.RequestModel.find()
+  async findAll() {
+    return await this.RequestModel.find()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} request`;
+  async findOne(id: string) {
+    return await this.RequestModel.findById(id);
   }
 
-  update(id: number, updateRequestDto: UpdateRequestDto) {
-    return `This action updates a #${id} request`;
+  async findRequests(patient_id: string) {
+    return await this.RequestModel.find({ patientId: patient_id })
+
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} request`;
+  async update(id: string, updateRequestDto: UpdateRequestDto) {
+    return await this.RequestModel.updateOne({ _id: id }, updateRequestDto);
+  }
+
+  async remove(id: number) {
+    return await `This action removes a #${id} request`;
   }
 }
