@@ -3,13 +3,16 @@ import { Document, ObjectId, SchemaTypes, Types } from 'mongoose';
 
 export type RequestDocument = Request & Document;
 
-@Schema()
+@Schema({timestamps:true})
 export class Request {
     @Prop({ required: true, type: SchemaTypes.ObjectId })
     patientId: Types.ObjectId;
 
     @Prop({ required: true })
     requestType: string;
+
+    @Prop({ required: true })
+    requestStatus: string;
 
     @Prop({ required: true })
     patientName: string;
@@ -29,10 +32,10 @@ export class Request {
     @Prop()
     prescription: string;
 
-    @Prop({ required: true })
+    @Prop()
     createdBy: string;
 
-    @Prop({ required: true })
+    @Prop()
     updatedBy: string;
 }
 

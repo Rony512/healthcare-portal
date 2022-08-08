@@ -7,7 +7,7 @@ import { ApiTags } from '@nestjs/swagger';
 @Controller('prescription')
 @ApiTags('prescription')
 export class PrescriptionController {
-  constructor(private readonly prescriptionService: PrescriptionService) {}
+  constructor(private readonly prescriptionService: PrescriptionService) { }
 
   @Post()
   create(@Body() createPrescriptionDto: CreatePrescriptionDto) {
@@ -21,12 +21,12 @@ export class PrescriptionController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.prescriptionService.findOne(+id);
+    return this.prescriptionService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePrescriptionDto: UpdatePrescriptionDto) {
-    return this.prescriptionService.update(+id, updatePrescriptionDto);
+    return this.prescriptionService.update(id, updatePrescriptionDto);
   }
 
   @Delete(':id')

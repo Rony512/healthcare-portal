@@ -1,7 +1,17 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty, IsNumber } from "class-validator";
+import { Type } from "class-transformer";
+import { IsNotEmpty, IsNumber, ValidateNested } from "class-validator";
 
+class historyClass {
+    @ApiProperty()
+    date: Date;
 
+    @ApiProperty()
+    title: string;
+
+    @ApiProperty()
+    requestId:string
+}
 export class CreatePatientDto {
     @ApiProperty()
     @IsNotEmpty()
@@ -30,9 +40,11 @@ export class CreatePatientDto {
     @IsNotEmpty()
     patientAllergies: string[];
 
-    @ApiProperty()
+    @ApiProperty({ type: [historyClass] })
+    @ValidateNested({ each: true }) 
+    @Type(() => historyClass)
     @IsNotEmpty()
-    requestHistory: Object[];
+    requestHistory: historyClass[];
 
     @ApiProperty() @IsNotEmpty() @IsNumber()
     patientMobile_1: number;

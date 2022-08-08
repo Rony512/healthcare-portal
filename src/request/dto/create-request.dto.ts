@@ -9,18 +9,23 @@ const requestType = {
     PLUS: 'PLUS'
 }
 
+const requestStatus = {
+    OPEN: 'OPEN',
+    CLOSED: 'CLOSED'
+}
+
 class physicalExamclass {
     @ApiProperty() @IsNotEmpty()
-    inspection:string;
+    inspection: string;
 
     @ApiProperty() @IsNotEmpty()
-    palpation:string;
+    palpation: string;
 
     @ApiProperty() @IsNotEmpty()
-    auscultation:string;
+    auscultation: string;
 
     @ApiProperty() @IsNotEmpty()
-    percussion:string;
+    percussion: string;
 }
 
 export class CreateRequestDto {
@@ -29,6 +34,9 @@ export class CreateRequestDto {
 
     @ApiProperty() @IsNotEmpty() @IsEnum(requestType)
     requestType: string;
+
+    @ApiProperty() @IsNotEmpty() @IsEnum(requestStatus)
+    requestStatus: string;
 
     @ApiProperty() @IsNotEmpty()
     patientName: string;
@@ -50,7 +58,4 @@ export class CreateRequestDto {
 
     @ApiProperty() @IsNotEmpty()
     createdBy: string;
-
-    @ApiProperty() @IsNotEmpty()
-    updatedBy: string;
 }

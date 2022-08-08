@@ -1,15 +1,15 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, SchemaTypes, Types } from 'mongoose';
 
 export type PrescriptionDocument = Prescription & Document;
 
 @Schema()
 export class Prescription {
-    @Prop({ required: true })
-    PatientId: string;
+    @Prop({ required: true, type: SchemaTypes.ObjectId })
+    PatientId: Types.ObjectId;
 
-    @Prop({ required: true })
-    requestId: string;
+    @Prop({ required: true, type: SchemaTypes.ObjectId })
+    requestId: Types.ObjectId;
 
     @Prop()
     labTests: Object[];

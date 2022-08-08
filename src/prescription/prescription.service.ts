@@ -8,23 +8,23 @@ import { Prescription, PrescriptionDocument } from './schemas/prescription.schem
 @Injectable()
 export class PrescriptionService {
   constructor(@InjectModel(Prescription.name) private readonly patientModel: Model<PrescriptionDocument>) { }
-  create(createPrescriptionDto: CreatePrescriptionDto) {
-    return 'This action adds a new prescription';
+  async create(createPrescriptionDto: CreatePrescriptionDto) {
+    return await this.patientModel.create(createPrescriptionDto);
   }
 
-  findAll() {
-    return this.patientModel.find();
+  async findAll() {
+    return await this.patientModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} prescription`;
+  async findOne(id: string) {
+    return await this.patientModel.findById(id);
   }
 
-  update(id: number, updatePrescriptionDto: UpdatePrescriptionDto) {
-    return `This action updates a #${id} prescription`;
+  async update(id: string, updatePrescriptionDto: UpdatePrescriptionDto) {
+    return await this.patientModel.updateOne({ _id: id }, updatePrescriptionDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} prescription`;
+  async remove(id: number) {
+    return await `This action removes a #${id} prescription`;
   }
 }
